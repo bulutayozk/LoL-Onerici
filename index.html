@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Bugün Hangi Şampiyonu Oynamalıyım?</title>
+
+<style>
+body{
+    background:#0a0a0a;
+    color:white;
+    font-family:Arial,sans-serif;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    min-height:100vh;
+}
+
+.container{
+    background:#1b1b1b;
+    padding:30px;
+    border-radius:15px;
+    width:400px;
+    text-align:center;
+}
+
+h1{
+    color:#d4af37;
+}
+
+select,button{
+    width:100%;
+    padding:12px;
+    margin-top:10px;
+    border:none;
+    border-radius:8px;
+}
+
+button{
+    background:#d4af37;
+    font-weight:bold;
+    cursor:pointer;
+}
+
+#sonuc{
+    margin-top:20px;
+    font-size:22px;
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+<h1>LoL Ruh Hali Seçici</h1>
+
+<p>Nasıl hissediyorsun?</p>
+
+<select id="mood">
+    <option value="agresif">Agresif</option>
+    <option value="sakin">Sakin</option>
+    <option value="eglence">Eğlenmek İstiyorum</option>
+    <option value="tasimak">Takımı Taşımak İstiyorum</option>
+</select>
+
+<p>Hangi rol?</p>
+
+<select id="role">
+    <option value="top">Top</option>
+    <option value="jungle">Jungle</option>
+    <option value="mid">Mid</option>
+    <option value="adc">ADC</option>
+    <option value="support">Support</option>
+</select>
+
+<button onclick="oner()">Şampiyon Öner</button>
+
+<div id="sonuc"></div>
+
+</div>
+
+<script>
+
+function oner(){
+
+let mood = document.getElementById("mood").value;
+let role = document.getElementById("role").value;
+
+let champ = "";
+
+if(mood=="agresif" && role=="mid") champ="Yasuo";
+else if(mood=="agresif" && role=="top") champ="Darius";
+else if(mood=="agresif" && role=="jungle") champ="Lee Sin";
+else if(mood=="agresif" && role=="adc") champ="Draven";
+else if(mood=="agresif" && role=="support") champ="Pyke";
+
+else if(mood=="sakin" && role=="top") champ="Garen";
+else if(mood=="sakin" && role=="mid") champ="Lux";
+else if(mood=="sakin" && role=="jungle") champ="Amumu";
+else if(mood=="sakin" && role=="adc") champ="Ashe";
+else if(mood=="sakin" && role=="support") champ="Soraka";
+
+else if(mood=="eglence" && role=="top") champ="Teemo";
+else if(mood=="eglence" && role=="mid") champ="Veigar";
+else if(mood=="eglence" && role=="jungle") champ="Shaco";
+else if(mood=="eglence" && role=="adc") champ="Jhin";
+else if(mood=="eglence" && role=="support") champ="Bard";
+
+else if(mood=="tasimak" && role=="top") champ="Fiora";
+else if(mood=="tasimak" && role=="mid") champ="Yone";
+else if(mood=="tasimak" && role=="jungle") champ="Viego";
+else if(mood=="tasimak" && role=="adc") champ="Kai'Sa";
+else if(mood=="tasimak" && role=="support") champ="Thresh";
+
+document.getElementById("sonuc").innerHTML =
+"Bugün oynaman gereken şampiyon: <br><b>" + champ + "</b>";
+}
+
+</script>
+
+</body>
+</html>
