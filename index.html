@@ -87,37 +87,121 @@ function oner(){
 let mood = document.getElementById("mood").value;
 let role = document.getElementById("role").value;
 
-let champ = "";
+let champs = [];
 
-if(mood=="agresif" && role=="mid") champ="Yasuo";
-else if(mood=="agresif" && role=="top") champ="Darius";
-else if(mood=="agresif" && role=="jungle") champ="Lee Sin";
-else if(mood=="agresif" && role=="adc") champ="Draven";
-else if(mood=="agresif" && role=="support") champ="Pyke";
+// AGRESİF
+if(mood=="agresif"){
+    champs = {
+        top:["Darius","Renekton","Illaoi"],
+        jungle:["Lee Sin","Kha'Zix","Elise"],
+        mid:["Zed","Yasuo","Sylas"],
+        adc:["Draven","Samira","Lucian"],
+        support:["Pyke","Blitzcrank","Thresh"]
+    }[role];
+}
 
-else if(mood=="sakin" && role=="top") champ="Garen";
-else if(mood=="sakin" && role=="mid") champ="Lux";
-else if(mood=="sakin" && role=="jungle") champ="Amumu";
-else if(mood=="sakin" && role=="adc") champ="Ashe";
-else if(mood=="sakin" && role=="support") champ="Soraka";
+// SAKİN
+else if(mood=="sakin"){
+    champs = {
+        top:["Garen","Malphite","Ornn"],
+        jungle:["Amumu","Sejuani","Nunu"],
+        mid:["Lux","Annie","Viktor"],
+        adc:["Ashe","Jinx","Caitlyn"],
+        support:["Soraka","Lulu","Janna"]
+    }[role];
+}
 
-else if(mood=="eglence" && role=="top") champ="Teemo";
-else if(mood=="eglence" && role=="mid") champ="Veigar";
-else if(mood=="eglence" && role=="jungle") champ="Shaco";
-else if(mood=="eglence" && role=="adc") champ="Jhin";
-else if(mood=="eglence" && role=="support") champ="Bard";
+// EĞLENCE
+else if(mood=="eglence"){
+    champs = {
+        top:["Teemo","Shen","Cho'Gath"],
+        jungle:["Shaco","Rammus","Fiddlesticks"],
+        mid:["Veigar","Aurelion Sol","Ziggs"],
+        adc:["Jhin","Ezreal","Tristana"],
+        support:["Bard","Nami","Zyra"]
+    }[role];
+}
 
-else if(mood=="tasimak" && role=="top") champ="Fiora";
-else if(mood=="tasimak" && role=="mid") champ="Yone";
-else if(mood=="tasimak" && role=="jungle") champ="Viego";
-else if(mood=="tasimak" && role=="adc") champ="Kai'Sa";
-else if(mood=="tasimak" && role=="support") champ="Thresh";
+// TAŞIMA
+else if(mood=="tasimak"){
+    champs = {
+        top:["Fiora","Camille","Jax"],
+        jungle:["Viego","Kayn","Graves"],
+        mid:["Yone","Kassadin","Katarina"],
+        adc:["Kai'Sa","Vayne","Jinx"],
+        support:["Thresh","Nautilus","Rakan"]
+    }[role];
+}
+
+// TILT
+else if(mood=="tilt"){
+    champs = {
+        top:["Malphite","Shen","Sion"],
+        jungle:["Amumu","Rammus","Zac"],
+        mid:["Annie","Malzahar","Swain"],
+        adc:["Ashe","Miss Fortune","Jhin"],
+        support:["Lulu","Soraka","Janna"]
+    }[role];
+}
+
+// TRYHARD
+else if(mood=="tryhard"){
+    champs = {
+        top:["Camille","Fiora","Aatrox"],
+        jungle:["Lee Sin","Viego","Elise"],
+        mid:["Azir","Orianna","Syndra"],
+        adc:["Kai'Sa","Aphelios","Jinx"],
+        support:["Thresh","Rakan","Nautilus"]
+    }[role];
+}
+
+// CHILL
+else if(mood=="chill"){
+    champs = {
+        top:["Garen","Ornn","Malphite"],
+        jungle:["Nunu","Amumu","Zac"],
+        mid:["Annie","Lux","Veigar"],
+        adc:["Ashe","Jinx","Sivir"],
+        support:["Soraka","Janna","Lulu"]
+    }[role];
+}
+
+// YENİLİK
+else if(mood=="yenilik"){
+    champs = {
+        top:["Singed","Quinn","Illaoi"],
+        jungle:["Ivern","Briar","Zac"],
+        mid:["Aurelion Sol","Taliyah","Neeko"],
+        adc:["Seraphine","Karthus","Swain"],
+        support:["Bard","Zyra","Milio"]
+    }[role];
+}
+
+// SOLO CARRY
+else if(mood=="solo"){
+    champs = {
+        top:["Fiora","Jax","Riven"],
+        jungle:["Kayn","Viego","Kha'Zix"],
+        mid:["Yasuo","Zed","Katarina"],
+        adc:["Vayne","Kai'Sa","Draven"],
+        support:["Pyke","Thresh","Blitzcrank"]
+    }[role];
+}
+
+// RANDOM İNTİKAM vs fallback
+else{
+    champs = ["Garen","Lux","Ashe","Jinx"];
+}
+
+let champ = champs[Math.floor(Math.random() * champs.length)];
 
 document.getElementById("sonuc").innerHTML =
-"Bugün oynaman gereken şampiyon: <br><b>" + champ + "</b>";
+"Bugün oynaman gereken şampiyon: <br><b style='color:#d4af37'>" + champ + "</b>";
+
 }
 
 </script>
+
 
 </body>
 </html>
