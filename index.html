@@ -3,13 +3,14 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Bugün Hangi Şampiyonu Oynamalıyım?</title>
+<title>LoL Ruh Hali Şampiyon Önerici</title>
 
 <style>
 body{
-    background:#0a0a0a;
+    margin:0;
+    font-family:Arial;
+    background: radial-gradient(circle at top, #1a1a1a, #000);
     color:white;
-    font-family:Arial,sans-serif;
     display:flex;
     justify-content:center;
     align-items:center;
@@ -17,23 +18,26 @@ body{
 }
 
 .container{
-    background:#1b1b1b;
-    padding:30px;
+    width:420px;
+    background:#111;
+    padding:25px;
     border-radius:15px;
-    width:400px;
-    text-align:center;
+    box-shadow:0 0 20px rgba(212,175,55,0.3);
 }
 
 h1{
+    text-align:center;
     color:#d4af37;
+    margin-bottom:20px;
 }
 
-select,button{
+select, button{
     width:100%;
     padding:12px;
     margin-top:10px;
     border:none;
     border-radius:8px;
+    font-size:14px;
 }
 
 button{
@@ -42,29 +46,67 @@ button{
     cursor:pointer;
 }
 
-#sonuc{
+button:hover{
+    background:#b8912d;
+}
+
+.card{
     margin-top:20px;
+    background:#1b1b1b;
+    border-radius:12px;
+    overflow:hidden;
+    border:1px solid #d4af37;
+    animation:fade 0.4s ease;
+}
+
+.card img{
+    width:100%;
+}
+
+.card-body{
+    padding:15px;
+}
+
+.champ-name{
     font-size:22px;
+    color:#d4af37;
+    margin-bottom:8px;
+}
+
+.desc{
+    font-size:14px;
+    color:#ccc;
+}
+
+@keyframes fade{
+    from{opacity:0; transform:translateY(10px);}
+    to{opacity:1; transform:translateY(0);}
 }
 </style>
+
 </head>
 
 <body>
 
 <div class="container">
 
-<h1>LoL Ruh Hali Seçici</h1>
+<h1>⚔ LoL Ruh Hali Seçici</h1>
 
 <p>Nasıl hissediyorsun?</p>
 
 <select id="mood">
     <option value="agresif">Agresif</option>
     <option value="sakin">Sakin</option>
-    <option value="eglence">Eğlenmek İstiyorum</option>
-    <option value="tasimak">Takımı Taşımak İstiyorum</option>
+    <option value="eglence">Eğlence</option>
+    <option value="tasimak">Taşımak</option>
+    <option value="tilt">Tilt 😡</option>
+    <option value="tryhard">Tryhard 💪</option>
+    <option value="chill">Chill 😌</option>
+    <option value="yenilik">Yeni şey</option>
+    <option value="solo">Solo carry 🐺</option>
 </select>
 
-<p>Hangi rol?</p>
+<p>Rol seç:</p>
 
 <select id="role">
     <option value="top">Top</option>
@@ -87,121 +129,103 @@ function oner(){
 let mood = document.getElementById("mood").value;
 let role = document.getElementById("role").value;
 
-let champs = [];
-
-// AGRESİF
-if(mood=="agresif"){
-    champs = {
-        top:["Darius","Renekton","Illaoi"],
-        jungle:["Lee Sin","Kha'Zix","Elise"],
-        mid:["Zed","Yasuo","Sylas"],
-        adc:["Draven","Samira","Lucian"],
-        support:["Pyke","Blitzcrank","Thresh"]
-    }[role];
+let pool = {
+agresif:{
+top:["Darius","Renekton","Illaoi"],
+jungle:["Lee Sin","Kha'Zix","Elise"],
+mid:["Yasuo","Zed","Sylas"],
+adc:["Draven","Samira","Lucian"],
+support:["Pyke","Thresh","Blitzcrank"]
+},
+sakin:{
+top:["Garen","Ornn","Malphite"],
+jungle:["Amumu","Sejuani","Nunu"],
+mid:["Lux","Annie","Viktor"],
+adc:["Ashe","Jinx","Caitlyn"],
+support:["Soraka","Lulu","Janna"]
+},
+eglence:{
+top:["Teemo","Shen","Cho'Gath"],
+jungle:["Shaco","Rammus","Zac"],
+mid:["Veigar","Ziggs","Neeko"],
+adc:["Jhin","Tristana","Ezreal"],
+support:["Bard","Nami","Zyra"]
+},
+tasimak:{
+top:["Fiora","Camille","Jax"],
+jungle:["Viego","Kayn","Graves"],
+mid:["Yone","Kassadin","Katarina"],
+adc:["Kai'Sa","Vayne","Jinx"],
+support:["Thresh","Rakan","Nautilus"]
+},
+tilt:{
+top:["Malphite","Shen","Sion"],
+jungle:["Amumu","Rammus","Zac"],
+mid:["Malzahar","Annie","Swain"],
+adc:["Ashe","Miss Fortune","Jhin"],
+support:["Soraka","Lulu","Janna"]
+},
+tryhard:{
+top:["Camille","Fiora","Aatrox"],
+jungle:["Lee Sin","Viego","Elise"],
+mid:["Azir","Orianna","Syndra"],
+adc:["Aphelios","Kai'Sa","Jinx"],
+support:["Thresh","Rakan","Nautilus"]
+},
+chill:{
+top:["Garen","Ornn","Malphite"],
+jungle:["Nunu","Zac","Amumu"],
+mid:["Annie","Lux","Veigar"],
+adc:["Ashe","Sivir","Jinx"],
+support:["Soraka","Lulu","Janna"]
+},
+yenilik:{
+top:["Singed","Quinn","Illaoi"],
+jungle:["Ivern","Zac","Briar"],
+mid:["Aurelion Sol","Taliyah","Neeko"],
+adc:["Seraphine","Karthus","Swain"],
+support:["Bard","Milio","Zyra"]
+},
+solo:{
+top:["Fiora","Jax","Riven"],
+jungle:["Kayn","Viego","Kha'Zix"],
+mid:["Yasuo","Zed","Katarina"],
+adc:["Vayne","Kai'Sa","Draven"],
+support:["Pyke","Thresh","Blitzcrank"]
 }
+};
 
-// SAKİN
-else if(mood=="sakin"){
-    champs = {
-        top:["Garen","Malphite","Ornn"],
-        jungle:["Amumu","Sejuani","Nunu"],
-        mid:["Lux","Annie","Viktor"],
-        adc:["Ashe","Jinx","Caitlyn"],
-        support:["Soraka","Lulu","Janna"]
-    }[role];
-}
+let champ = pool[mood][role];
+let pick = champ[Math.floor(Math.random()*champ.length)];
 
-// EĞLENCE
-else if(mood=="eglence"){
-    champs = {
-        top:["Teemo","Shen","Cho'Gath"],
-        jungle:["Shaco","Rammus","Fiddlesticks"],
-        mid:["Veigar","Aurelion Sol","Ziggs"],
-        adc:["Jhin","Ezreal","Tristana"],
-        support:["Bard","Nami","Zyra"]
-    }[role];
-}
+let explanations = {
+"Yasuo":"Mekanik ve agresif oyun.",
+"Zed":"Assassin burst hasarı.",
+"Garen":"Basit ve dayanıklı.",
+"Lee Sin":"Tempo jungle şampiyonu.",
+"Lux":"Güvenli menzilli mage.",
+"Thresh":"Oyun kurucu support.",
+"Teemo":"Eğlence + tilt.",
+"Vayne":"Late game carry.",
+"Jinx":"Teamfight ADC.",
+"Fiora":"Duel ustası."
+};
 
-// TAŞIMA
-else if(mood=="tasimak"){
-    champs = {
-        top:["Fiora","Camille","Jax"],
-        jungle:["Viego","Kayn","Graves"],
-        mid:["Yone","Kassadin","Katarina"],
-        adc:["Kai'Sa","Vayne","Jinx"],
-        support:["Thresh","Nautilus","Rakan"]
-    }[role];
-}
+let img = "https://ddragon.leagueoflegends.com/cdn/img/champion/loading/" + pick + "_0.jpg";
 
-// TILT
-else if(mood=="tilt"){
-    champs = {
-        top:["Malphite","Shen","Sion"],
-        jungle:["Amumu","Rammus","Zac"],
-        mid:["Annie","Malzahar","Swain"],
-        adc:["Ashe","Miss Fortune","Jhin"],
-        support:["Lulu","Soraka","Janna"]
-    }[role];
-}
-
-// TRYHARD
-else if(mood=="tryhard"){
-    champs = {
-        top:["Camille","Fiora","Aatrox"],
-        jungle:["Lee Sin","Viego","Elise"],
-        mid:["Azir","Orianna","Syndra"],
-        adc:["Kai'Sa","Aphelios","Jinx"],
-        support:["Thresh","Rakan","Nautilus"]
-    }[role];
-}
-
-// CHILL
-else if(mood=="chill"){
-    champs = {
-        top:["Garen","Ornn","Malphite"],
-        jungle:["Nunu","Amumu","Zac"],
-        mid:["Annie","Lux","Veigar"],
-        adc:["Ashe","Jinx","Sivir"],
-        support:["Soraka","Janna","Lulu"]
-    }[role];
-}
-
-// YENİLİK
-else if(mood=="yenilik"){
-    champs = {
-        top:["Singed","Quinn","Illaoi"],
-        jungle:["Ivern","Briar","Zac"],
-        mid:["Aurelion Sol","Taliyah","Neeko"],
-        adc:["Seraphine","Karthus","Swain"],
-        support:["Bard","Zyra","Milio"]
-    }[role];
-}
-
-// SOLO CARRY
-else if(mood=="solo"){
-    champs = {
-        top:["Fiora","Jax","Riven"],
-        jungle:["Kayn","Viego","Kha'Zix"],
-        mid:["Yasuo","Zed","Katarina"],
-        adc:["Vayne","Kai'Sa","Draven"],
-        support:["Pyke","Thresh","Blitzcrank"]
-    }[role];
-}
-
-// RANDOM İNTİKAM vs fallback
-else{
-    champs = ["Garen","Lux","Ashe","Jinx"];
-}
-
-let champ = champs[Math.floor(Math.random() * champs.length)];
-
-document.getElementById("sonuc").innerHTML =
-"Bugün oynaman gereken şampiyon: <br><b style='color:#d4af37'>" + champ + "</b>";
+document.getElementById("sonuc").innerHTML = `
+<div class="card">
+    <img src="${img}">
+    <div class="card-body">
+        <div class="champ-name">${pick}</div>
+        <div class="desc">${explanations[pick] || "Ruh haline göre seçildi."}</div>
+    </div>
+</div>
+`;
 
 }
 
 </script>
-
 
 </body>
 </html>
